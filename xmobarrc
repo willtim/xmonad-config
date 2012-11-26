@@ -1,0 +1,18 @@
+Config { font = "xft:Bitstream Vera Sans Mono:size=9:bold:antialias=true"  
+     , bgColor = "#000000"  
+     , fgColor = "grey"  
+     , position = Static { xpos = 0 , ypos = 0, width = 1344, height = 18 }  
+     , commands = [ 
+               Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
+             , Run Memory ["-t","Mem: <usedratio>%"] 10
+             , Run Swap ["-t","USwap: <used>"] 10
+             , Run BatteryP ["BAT0","BAT1"] ["-t","<left>","--","-c","energy_full"]  60
+             , Run Com "/home/tim/bin/batt-xmobar" [] "battstat" 60
+             , Run Network "wlan0" ["-L","0","-H","70","--normal","green","--high","red"] 10
+           , Run Date "%a %b %_d %l:%M" "date" 10  
+           , Run StdinReader  
+           ]
+     , sepChar = "%"  
+     , alignSep = "}{"  
+     , template = " %StdinReader%}{ <fc=grey>%cpu% ~ Batt: %battery% [%battstat%] ~ %memory% ~ %swap% ~ %wlan0%</fc> ~ <fc=#ee9a00>%date%</fc>  "  
+     }  
